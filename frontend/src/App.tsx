@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import GlobalStyle from './styles/global';
 
-import Routes from './routes';
+import Routes from './routes/routes';
 
 const App: React.FC = () => (
   <Router>
@@ -11,6 +11,6 @@ const App: React.FC = () => (
 
     <GlobalStyle />
   </Router>
-)/
+);
 
 export default App;
