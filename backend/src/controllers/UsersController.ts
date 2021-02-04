@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import UsersRepository from "../repositories/UsersRepository";
-
+import UploadUserPhotoService from "../services/UploadUserPhotoService";
 
 export default class UsersController {
 
@@ -42,6 +42,17 @@ export default class UsersController {
       name,
       birthdate,
       photo
+    });
+
+    return response.json(user);
+  }
+
+  public async upload(request: Request, response: Response): Promise<Response> {
+    const uploadUserPhotoService = new UploadUserPhotoService();
+
+    const user = await uploadUserPhotoService.execute({
+      user_id: request.params.id,
+      photoFilename: request.file.filename,
     });
 
     return response.json(user);

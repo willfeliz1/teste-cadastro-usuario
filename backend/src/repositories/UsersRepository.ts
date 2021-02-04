@@ -59,6 +59,16 @@ class UsersRepository {
 
     return this.ormRepository.save(user);
   }
+
+  public async findbyid(user_id: string): Promise<User | undefined> {
+    const user = await this.ormRepository.findOne(user_id);
+
+    return user;
+  }
+
+  public async save(user: User): Promise<User> {
+    return this.ormRepository.save(user);
+  }
 }
 
 export default UsersRepository;
