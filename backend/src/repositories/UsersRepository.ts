@@ -36,7 +36,6 @@ class UsersRepository {
   }
 
   public async create({ name, birthdate, email, photo }: IRequest): Promise<User> {
-
     const user = await this.ormRepository.create({
       name,
       birthdate,

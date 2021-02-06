@@ -1,3 +1,4 @@
+import { classToClass } from "class-transformer";
 import { Request, Response } from "express";
 import UsersRepository from "../repositories/UsersRepository";
 import UploadUserPhotoService from "../services/UploadUserPhotoService";
@@ -13,22 +14,26 @@ export default class UsersController {
       response.status(400).json({ message: 'users not found'});
     }
 
-    return response.json(users);
+    return response.json(classToClass(users));
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
     const usersRepository = new UsersRepository();
 
-    const { name, birthdate, email, photo } = request.body;
+    const { name, birthdate, email } = request.body;
+
+    const requestImage = request.file as Express.Multer.File;
+
+    const photo = requestImage.filename;
 
     const user = await usersRepository.create({
       name,
       birthdate,
       email,
-      photo
+      photo,
     });
 
-    return response.json(user);
+    return response.json(classToClass(user));
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
@@ -36,16 +41,17 @@ export default class UsersController {
     
     const user_id = request.params.id;
 
-    const { name, birthdate, photo } = request.body;
+    const { name, birthdate, email, photo } = request.body;
 
     const user = await usersRepository.update({
       user_id,
       name,
       birthdate,
+      email,
       photo
     });
 
-    return response.json(user);
+    return response.json(classToClass(user));
   }
 
   public async upload(request: Request, response: Response): Promise<Response> {
@@ -56,6 +62,6 @@ export default class UsersController {
       photoFilename: request.file.filename,
     });
 
-    return response.json(user);
+    return response.json(classToClass(user));
   }
 }

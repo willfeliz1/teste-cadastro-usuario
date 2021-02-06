@@ -14,6 +14,10 @@ interface IUploadConfig {
     storage: StorageEngine;
   };
 
+  multerCreate: {
+    storage: StorageEngine;
+  };
+
   config: {
     disk: {};
   };
@@ -28,6 +32,18 @@ export default {
   multer: {
     storage: multer.diskStorage({
       destination: tmpFolder,
+      filename(request, file, callback) {
+        const fileHash = crypto.randomBytes(10).toString('hex');
+        const filename = `${fileHash}-${file.originalname}`;
+
+        return callback(null, filename);
+      },
+    }),
+  },
+  
+  multerCreate: {
+    storage: multer.diskStorage({
+      destination: path.join(__dirname, '..', 'tmp', 'uploads'),
       filename(request, file, callback) {
         const fileHash = crypto.randomBytes(10).toString('hex');
         const filename = `${fileHash}-${file.originalname}`;

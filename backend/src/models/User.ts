@@ -1,3 +1,4 @@
+import { Expose } from 'class-transformer';
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('users')
@@ -17,4 +18,11 @@ export class User {
 
   @Column()
   photo: string;
+
+  @Expose({ name: 'photo_url' })
+  get getPhotoUrl(): string | null {
+    return this.photo
+      ? `http://192.168.100.242:3333/files/${this.photo}`
+      : null;
+  }
 }
