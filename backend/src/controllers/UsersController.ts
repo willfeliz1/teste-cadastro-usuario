@@ -17,6 +17,22 @@ export default class UsersController {
     return response.json(classToClass(users));
   }
 
+  public async show(request: Request, response: Response): Promise<Response> {
+    const usersRepository = new UsersRepository();
+
+    const user_id = request.params.id;
+
+    const user = await usersRepository.show(user_id);
+
+    if(!user) {
+      response.status(400).json({ message: 'user not found'});
+    }
+
+    return response.json(classToClass(user));
+  }
+
+
+
   public async create(request: Request, response: Response): Promise<Response> {
     const usersRepository = new UsersRepository();
 

@@ -35,6 +35,16 @@ class UsersRepository {
     return users;
   }
 
+  public async show(user_id: string): Promise<User> {
+    const user = await this.ormRepository.findOne({ id: user_id });
+
+    if(!user) {
+      throw new Error('User not found');
+    }
+
+    return user;
+  }
+
   public async create({ name, birthdate, email, photo }: IRequest): Promise<User> {
     const user = await this.ormRepository.create({
       name,
