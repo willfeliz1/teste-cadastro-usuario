@@ -9,8 +9,11 @@ export class User {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ type: 'date'})
   birthdate: Date;
+
+  @Column()
+  email: string;
 
   @Column()
   photo: string;

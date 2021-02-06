@@ -19,11 +19,12 @@ export default class UsersController {
   public async create(request: Request, response: Response): Promise<Response> {
     const usersRepository = new UsersRepository();
 
-    const { name, birthdate, photo } = request.body;
+    const { name, birthdate, email, photo } = request.body;
 
     const user = await usersRepository.create({
       name,
       birthdate,
+      email,
       photo
     });
 

@@ -18,6 +18,7 @@ interface IRequest {
   user_id?: string;
   name: string;
   birthdate: Date;
+  email: string;
   photo: string;
 }
 
@@ -34,10 +35,12 @@ class UsersRepository {
     return users;
   }
 
-  public async create({ name, birthdate, photo }: IRequest): Promise<User> {
+  public async create({ name, birthdate, email, photo }: IRequest): Promise<User> {
+
     const user = await this.ormRepository.create({
       name,
       birthdate,
+      email,
       photo,
     });
 
