@@ -117,8 +117,8 @@ const EditUser: React.FC = () => {
 
   const validations = Yup.object().shape({
     name: Yup.string().required('Campo nome obrigatório'),
-    birthdate: Yup.string().required(),
     email: Yup.string().email().required('Campo email obrigatório'),
+    newBirthDate: Yup.string().required('campo data de nascimento obrigatório'),
     photo: Yup.string(),
   });
 
@@ -131,6 +131,7 @@ const EditUser: React.FC = () => {
               id: params.id,
               name: user.name !== undefined ? user.name : "",
               birthdate: user.birthdate !== undefined ? user.birthdate : new Date(),
+              newBirthDate: newBirthdate,
               email: user?.email !== undefined ? user.email : "",
               photo: user?.photo !== undefined ? user.photo : "",
             }}
@@ -171,9 +172,9 @@ const EditUser: React.FC = () => {
                         e.target.value,
                       )}
                     />
-                    {errors.birthdate && (
+                    {errors.newBirthDate && (
                       <ErrorMessage>
-                        {errors.birthdate}
+                        {errors.newBirthDate}
                       </ErrorMessage>
                     )}                  
                   

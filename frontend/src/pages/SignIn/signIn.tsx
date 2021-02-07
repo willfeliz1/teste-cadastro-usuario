@@ -86,6 +86,7 @@ const SignIn: React.FC = () => {
   const validations = Yup.object().shape({
     name: Yup.string().required('Campo nome obrigatório'),
     birthdate: Yup.string().required(),
+    newBirthdate: Yup.string().required('Campo data de nascimento obrigatório'),
     email: Yup.string().email().required('Campo email obrigatório'),
     photo: Yup.string(),
   });
@@ -97,6 +98,7 @@ const SignIn: React.FC = () => {
             initialValues={{
               name: "",
               birthdate: "__/__/____",
+              newBirthdate: "",
               email: "",
               photo: "",
             }}
@@ -136,11 +138,11 @@ const SignIn: React.FC = () => {
                         e.target.value,
                       )}
                     />
-                    {errors.birthdate && (
+                    {errors.newBirthdate && (
                       <ErrorMessage>
-                        {errors.birthdate}
+                        {errors.newBirthdate}
                       </ErrorMessage>
-                    )}                  
+                    )}              
                   
                     <strong>E-mail:</strong>
                     <Input
