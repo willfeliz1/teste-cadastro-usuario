@@ -1,53 +1,62 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import api from '../../services/api';
 
 import { Container, Content, TextSide, Section, ButtonsContainer } from './styles';
 
+
+interface User {
+  id: string;
+  name: string;
+  birthdate: string;
+  email: string;
+  photo: string;
+  photo_url: string;
+}
+
 const Dashboard: React.FC = () => {
+  const [users, setUsers] = useState<User[]>([]);
+
+  useEffect(() => {
+    api.get('/users').then(response => {
+      setUsers(response.data);
+    });
+  }, []);
 
   return (
     <Container >
         <Content>
           <ul>
-              <li>
-                <Section>
-                  <TextSide >
-                    <img                      
-                      width="48"
-                      height="48"
-                      src="https://avatars.githubusercontent.com/u/50719156?s=460&u=81ec30b299ffe9d9275b4e207d9c4760fcada87a&v=4"
-                    />
-                    <div>
-                      <strong>Nome</strong>
-                      <span>William Felizardo</span>                    
-                    </div>
-                  </TextSide>
-                  <ButtonsContainer>
-                    <button>Abrir</button>
-                    <button>Editar</button>
-                  </ButtonsContainer>
-                </Section>
-              </li>
-              
-              <li>
-                <Section>
-                  <TextSide >
-                    <img                      
-                      width="48"
-                      height="48"
-                      src="https://avatars.githubusercontent.com/u/50719156?s=460&u=81ec30b299ffe9d9275b4e207d9c4760fcada87a&v=4"
-                    />
-                    <div>
-                      <strong>William Felizardo</strong>
-                      <span>Nome</span>                   
-                    </div>
-                  </TextSide>
-                  <ButtonsContainer>
-                    <button>Abrir</button>
-                    <button>Editar</button>
-                  </ButtonsContainer>
-                </Section>
-              </li>      
+              {users.map(user => (              
+                <li key={user.id}>
+                  <Section >                    
+                    <TextSide>
+                      <img                      
+                        width="48"
+                        height="48"
+                        src={user.photo_url}
+                        alt={user.photo}
+                      />
+                      <div>
+                        <strong>Nome:</strong>
+                        <span>{user.name}</span>                    
+                      </div>
+                    </TextSide>
+                    <ButtonsContainer>
+                      <Link to={`/show/${user.id}`}>
+                        <button>
+                          Abrir
+                        </button>
+                      </Link>
+                      <Link to={`/edit/${user.id}`}>
+                        <button>
+                          Editar
+                        </button>
+                      </Link>
+                    </ButtonsContainer>
+                  </Section>
+                </li>
+              ))}                                 
           </ul>
           <div>
             <Link to="/cadastro">Cadastrar</Link>

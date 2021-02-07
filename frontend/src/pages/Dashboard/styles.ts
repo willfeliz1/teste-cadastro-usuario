@@ -12,11 +12,12 @@ export const Content = styled.div`
   
   li {
     margin-top: 10px;
-    background: #834a12;
+    background: #1b75bb;
     border-radius: 20px;
     padding: 10px 20px;
-    box-shadow: 1px 1px 2px #814508;
+    box-shadow: 1px 1px 2px #257DC2;
     list-style-type: none;
+    color: white;
   }
   
  > div {
@@ -29,14 +30,15 @@ export const Content = styled.div`
       font-size: 16px;
       line-height: 22px;
       padding: 17px 50px;
-      background: #814508;
+      background: #1b75bb;
       border: 0;
       border-radius: 20px;
       text-decoration: none;
 
       &:hover {
         opacity: 0.8;
-      }
+        background-color: #1286de;
+      }  
     }
   }  
 `;
@@ -61,8 +63,8 @@ export const TextSide = styled.div`
     height: 56px;
     margin-right: 15px;
     border-radius: 50%;  
-    border: 2px solid #a35c15;
-    box-shadow: 1px 1px 5px #814508;
+    border: 2px solid #3B91D4;
+    box-shadow: 1px 1px 5px #3B91D4;
   }
 
   div {
@@ -76,15 +78,20 @@ export const TextSide = styled.div`
 export const ButtonsContainer = styled.div`
   button {
     width: 110px;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 22px;
     margin-left: 10px;
     padding: 7px;
-    background: #a35c15;
+    background: #a1bfd6;
     color: white;
     border: 0;
     border-radius: 20px;
-    box-shadow: 1px 1px 2px #814508;
+    box-shadow: 1px 1px 2px #6c8496;
+
+    &:hover {
+      opacity: 0.8;
+      background-color: #7fb3db
+    }  
   }
 `;
 
