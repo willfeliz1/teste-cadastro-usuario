@@ -19,7 +19,7 @@ interface IRequest {
   name: string;
   birthdate: Date;
   email: string;
-  photo: string;
+  photo?: string;
 }
 
 class UsersRepository {
@@ -41,7 +41,7 @@ class UsersRepository {
     if(!user) {
       throw new Error('User not found');
     }
-
+    
     return user;
   }
 
@@ -58,7 +58,7 @@ class UsersRepository {
     return user;
   }
 
-  public async update({ user_id, name, birthdate, photo }: IRequest): Promise<User> {
+  public async update({ user_id, name, birthdate }: IRequest): Promise<User> {
     const user = await this.ormRepository.findOne({ id: user_id });
 
     if(!user) {
@@ -67,7 +67,6 @@ class UsersRepository {
 
     user.name = name;
     user.birthdate = birthdate;
-    user.photo = photo;
 
     return this.ormRepository.save(user);
   }

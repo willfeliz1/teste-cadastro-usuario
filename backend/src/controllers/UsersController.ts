@@ -57,14 +57,13 @@ export default class UsersController {
     
     const user_id = request.params.id;
 
-    const { name, birthdate, email, photo } = request.body;
+    const { name, birthdate, email } = request.body;
 
     const user = await usersRepository.update({
       user_id,
       name,
       birthdate,
       email,
-      photo
     });
 
     return response.json(classToClass(user));
