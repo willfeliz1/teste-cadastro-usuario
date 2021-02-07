@@ -22,7 +22,7 @@ export class User {
   @Expose({ name: 'photo_url' })
   get getPhotoUrl(): string | null {
     return this.photo
-      ? `http://192.168.100.242:3333/files/${this.photo}`
+      ? `${process.env.APP_API_URL}/files/${this.photo}`
       : null;
   }
 }
