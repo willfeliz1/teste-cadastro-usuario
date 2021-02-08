@@ -86,7 +86,6 @@ const SignIn: React.FC = () => {
   const validations = Yup.object().shape({
     name: Yup.string().required('Campo nome obrigatório'),
     birthdate: Yup.string().required(),
-    newBirthdate: Yup.string().required('Campo data de nascimento obrigatório'),
     email: Yup.string().email().required('Campo email obrigatório'),
     photo: Yup.string(),
   });
